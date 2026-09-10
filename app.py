@@ -8,7 +8,75 @@ st.set_page_config(
     page_icon="🤖",
     layout="centered"
 )
+# Custom dark AI-style design
+st.markdown("""
+<style>
+    /* Main background */
+    .stApp {
+        background: linear-gradient(135deg, #0f172a, #1e1b4b, #111827);
+        color: white;
+    }
 
+    /* Main text */
+    h1, h2, h3, h4, p, label {
+        color: white !important;
+    }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #111827, #1e1b4b);
+    }
+
+    /* Text area and inputs */
+    textarea, input {
+        background-color: #1e293b !important;
+        color: white !important;
+        border: 1px solid #475569 !important;
+    }
+
+    /* Select boxes */
+    div[data-baseweb="select"] > div {
+        background-color: #1e293b !important;
+        color: white !important;
+        border: 1px solid #475569 !important;
+    }
+
+    /* Generate button */
+    .stButton > button {
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    .stButton > button:hover {
+        background: linear-gradient(90deg, #8b5cf6, #6366f1);
+        color: white;
+    }
+
+    /* Download button */
+    .stDownloadButton > button {
+        background: linear-gradient(90deg, #06b6d4, #3b82f6);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    /* Divider */
+    hr {
+        border-color: #475569;
+    }
+
+    /* Footer */
+    .stCaption {
+        color: #94a3b8 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 # Title
 st.title("🤖 AI Content Generator")
 st.write("Create high-quality content using AI")
