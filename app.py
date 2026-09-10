@@ -11,70 +11,58 @@ st.set_page_config(
 # Custom dark AI-style design
 st.markdown("""
 <style>
-    /* Main background */
-    .stApp {
-        background: linear-gradient(135deg, #0f172a, #1e1b4b, #111827);
-        color: white;
-    }
 
-    /* Main text */
-    h1, h2, h3, h4, p, label {
-        color: white !important;
-    }
+header[data-testid="stHeader"] {
+    background-color: #0f172a;
+}
 
-    /* Sidebar */
-    section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #111827, #1e1b4b);
-    }
+.stApp {
+    background: linear-gradient(135deg, #0f172a, #1e1b4b, #111827);
+    color: white;
+}
 
-    /* Text area and inputs */
-    textarea, input {
-        background-color: #1e293b !important;
-        color: white !important;
-        border: 1px solid #475569 !important;
-    }
+h1, h2, h3, h4, p, label {
+    color: white !important;
+}
 
-    /* Select boxes */
-    div[data-baseweb="select"] > div {
-        background-color: #1e293b !important;
-        color: white !important;
-        border: 1px solid #475569 !important;
-    }
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #111827, #1e1b4b);
+}
 
-    /* Generate button */
-    .stButton > button {
-        background: linear-gradient(90deg, #6366f1, #8b5cf6);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        padding: 10px;
-    }
+textarea, input {
+    background-color: #1e293b !important;
+    color: white !important;
+    border: 1px solid #475569 !important;
+}
 
-    .stButton > button:hover {
-        background: linear-gradient(90deg, #8b5cf6, #6366f1);
-        color: white;
-    }
+div[data-baseweb="select"] > div {
+    background-color: #1e293b !important;
+    color: white !important;
+    border: 1px solid #475569 !important;
+}
 
-    /* Download button */
-    .stDownloadButton > button {
-        background: linear-gradient(90deg, #06b6d4, #3b82f6);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-weight: bold;
-    }
+.stButton > button {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
 
-    /* Divider */
-    hr {
-        border-color: #475569;
-    }
+.stButton > button:hover {
+    background: linear-gradient(90deg, #8b5cf6, #6366f1);
+    color: white;
+}
 
-    /* Footer */
-    .stCaption {
-        color: #94a3b8 !important;
-    }
+.stDownloadButton > button {
+    background: linear-gradient(90deg, #06b6d4, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
 </style>
 """, unsafe_allow_html=True)
 # Title
