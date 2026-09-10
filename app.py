@@ -2,70 +2,98 @@ import os
 import streamlit as st
 from groq import Groq
 
-# -----------------------------
-# Page Configuration
-# -----------------------------
+# Page settings
 st.set_page_config(
     page_title="AI Content Generator",
     page_icon="🤖",
     layout="centered"
 )
 
+# Title
 st.title("🤖 AI Content Generator")
-st.write("Generate AI content using Groq API")
+st.write("Create high-quality content using AI")
 
-# -----------------------------
-# Load API Key
-# -----------------------------
-try:
-    api_key = st.secrets["GROQ_API_KEY"]
-except Exception:
-    api_key = os.getenv("GROQ_API_KEY")
+# API key
+api_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
 if not api_key:
-    st.error("❌ Groq API Key not found.")
+    st.error("Groq API key not found!")
     st.stop()
 
 client = Groq(api_key=api_key)
 
-# -----------------------------
 # Sidebar
-# -----------------------------
+st.sidebar.header("⚙️ Content Settings")
+
 content_type = st.sidebar.selectbox(
-    "Choose Content Type",
+    "📝 Content Type",
     [
         "Blog",
         "Email",
-        "Instagram Caption",
         "LinkedIn Post",
-        "Product Description"
+        "Instagram Caption",
+        "Facebook Post",
+        "Product Description",
+        "YouTube Script",
+        "Story",
+        "Tweet / X Post"
     ]
 )
 
-# -----------------------------
-# User Input
-# -----------------------------
-topic = st.text_input("Enter your topic")
+tone = st.sidebar.selectbox(
+    "🎯 Tone",
+    [
+        "Professional",
+        "Friendly",
+        "Creative",
+        "Persuasive",
+        "Funny",
+        "Simple"
+    ]
+)
 
-# -----------------------------
-# Generate Button
-# -----------------------------
-if st.button("Generate Content"):
+length = st.sidebar.selectbox(
+    "📏 Length",
+    [
+        "Short",
+        "Medium",
+        "Long"
+    ]
+)
 
-    if topic.strip() == "":
-        st.warning("Please enter a topic.")
+# Main input
+st.subheader("📝 Enter Your Topic")
+
+topic = st.text_area(
+    "What do you want to write about?",
+    placeholder="Example: Artificial Intelligence in education",
+    height=120
+)
+
+# Generate button
+if st.button("🚀 Generate Content", use_container_width=True):
+
+    if not topic.strip():
+        st.warning("Please enter a topic first.")
+
     else:
 
         prompt = f"""
-Write a professional {content_type} about:
+You are a professional content writer.
 
+Create a {content_type} about:
 {topic}
 
-Make it engaging, clear, and well-structured.
+Requirements:
+- Tone: {tone}
+- Length: {length}
+- Make it clear and engaging.
+- Use proper grammar.
+- Make the content useful and original.
 """
 
         try:
-            with st.spinner("Generating..."):
+            with st.spinner("🤖 AI is generating your content..."):
 
                 response = client.chat.completions.create(
                     model="openai/gpt-oss-20b",
@@ -79,18 +107,29 @@ Make it engaging, clear, and well-structured.
 
                 result = response.choices[0].message.content
 
-            st.success("Content Generated Successfully!")
+            st.success("✅ Content Generated Successfully!")
 
-            st.subheader("Generated Content")
+            st.subheader("📄 Generated Content")
 
-            st.write(result)
+            # Text area makes it easy to select and copy
+            st.text_area(
+                "Copy your content:",
+                result,
+                height=400
+            )
 
+            # Download button
             st.download_button(
-                "📥 Download",
+                label="📥 Download Content",
                 data=result,
                 file_name="generated_content.txt",
-                mime="text/plain"
+                mime="text/plain",
+                use_container_width=True
             )
 
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Something went wrong: {e}")
+
+# Footer
+st.markdown("---")
+st.caption("🤖 AI Content Generator | Powered by Groq | Built with Streamlit")
